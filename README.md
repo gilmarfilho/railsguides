@@ -1,1 +1,1 @@
-# railsguides
+# railstutorial
