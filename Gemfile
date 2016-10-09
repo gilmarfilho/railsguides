@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'bootstrap-sass', '3.3.6'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails',          '5.0.0.1'
 gem 'bcrypt',         '3.1.11'
+gem 'bootstrap-sass', '3.3.6'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
