@@ -21,7 +21,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        flash[:success] = "Welcome to my experimental App for Rails"
+        log_in @user
+        flash[:success] = 'Welcome to my experimental App for Rails'
         format.html { redirect_to @user }
         format.json { render :show, status: :created, location: @user }
       else
@@ -34,7 +35,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        flash[:success] = "Profile updated successfully"
+        flash[:success] = 'Profile updated successfully'
         format.html { redirect_to @user }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -47,7 +48,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      flash[:success] = "Profile deleted successfully"
+      flash[:success] = 'Profile deleted successfully'
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
