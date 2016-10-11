@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       flash[:success] = 'Welcome to my experimental App for Rails'
       log_in user
-      params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_back_or user
     else
       flash.now[:danger] = 'Invalid email/password combination'
