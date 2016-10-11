@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         log_in @user
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         flash[:success] = 'Welcome to my experimental App for Rails'
         format.html { redirect_to @user }
         format.json { render :show, status: :created, location: @user }
