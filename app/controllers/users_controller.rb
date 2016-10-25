@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    redirect_to root_url and return unless FILL_IN
   end
 
   def new
@@ -24,8 +25,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        log_in @user
-        flash[:success] = 'Welcome to my experimental App for Rails'
+        @user.send_activation_email
+        flash[:info] = "Please check your email to activate your account."
         format.html { redirect_to @user }
         format.json { render :show, status: :created, location: @user }
       else
@@ -47,7 +48,7 @@ class UsersController < ApplicationController
       end
     end
   end
-
+  
   def destroy
     User.find(params[:id]).destroy
     respond_to do |format|
