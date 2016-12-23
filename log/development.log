@@ -9233,3 +9233,1300 @@ WHERE c.contype = 'f'
   AND t3.nspname = ANY (current_schemas(false))
 ORDER BY c.conname
 [0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "toy_dev"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "toy_test"[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE DATABASE "toy_dev" ENCODING = 'unicode'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "toy_dev"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "toy_test"[0m
+  [1m[35m (1100.0ms)[0m  [1m[35mCREATE DATABASE "toy_dev" ENCODING = 'SQL_ASCII'[0m
+  [1m[35m (983.2ms)[0m  [1m[35mCREATE DATABASE "toy_test" ENCODING = 'SQL_ASCII'[0m
+  [1m[35m (15.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (12.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8456623692261955140);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20161002201017)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161002201017"]]
+  [1m[35m (4.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMicroposts (20161002214850)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.9ms)[0m  [1m[35mCREATE TABLE "microposts" ("id" serial primary key, "content" text, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161002214850"]]
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRememberDigestToUsers (20161011003956)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_digest" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161011003956"]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAdminToUsers (20161011032256)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.1ms)[0m  [1m[35mALTER TABLE "users" ADD "admin" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161011032256"]]
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddActivationToUsers (20161025001054)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "activation_digest" character varying[0m
+  [1m[35m (9.5ms)[0m  [1m[35mALTER TABLE "users" ADD "activated" boolean DEFAULT 'f'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "activated_at" timestamp[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161025001054"]]
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-11-01 17:06:56 UTC], ["updated_at", 2016-11-01 17:06:56 UTC]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8456623692261955140)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'microposts'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (1.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "admin", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Example User"], ["email", "example@railstutorial.org"], ["password_digest", "$2a$10$cFifa5hkcd2dRH3iVHQIY.gDCNFM6BfAX5nh1DWhV.V1nIWEhPVCS"], ["created_at", 2016-11-01 17:07:12 UTC], ["updated_at", 2016-11-01 17:07:12 UTC], ["admin", true], ["activation_digest", "$2a$10$hFazEUhUhb8at/uqCf/QsO3FoDU7eglvci2.9vNoxY.D3.mPdegpO"], ["activated", true], ["activated_at", 2016-11-01 17:07:12 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-1@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Lilian Casper II"], ["email", "example-1@railstutorial.org"], ["password_digest", "$2a$10$n4ukd4xusb0Qm5uv/7JNHu/hKbVj81ciSFJygACUJ1e4kPKG6Ffpu"], ["created_at", 2016-11-01 17:07:12 UTC], ["updated_at", 2016-11-01 17:07:12 UTC], ["activation_digest", "$2a$10$4gNZSkYPHcf.wxBmYtQcuuJycBQgEJxseIuPidQhtOYRo92JHkROy"], ["activated", true], ["activated_at", 2016-11-01 17:07:12 UTC]]
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-2@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Iva Gerlach"], ["email", "example-2@railstutorial.org"], ["password_digest", "$2a$10$wjHVkSYhBZ6WYQeQAPp5DescwaAgZvyr/3qBcBYBw1Bsqn.x5Fszq"], ["created_at", 2016-11-01 17:07:12 UTC], ["updated_at", 2016-11-01 17:07:12 UTC], ["activation_digest", "$2a$10$3f7OvZhQJsKl0I0RCOQwauiKtqTc3lAQv/PDTzJB1FWmGxNKgpcHK"], ["activated", true], ["activated_at", 2016-11-01 17:07:12 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-3@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Tyshawn Beer"], ["email", "example-3@railstutorial.org"], ["password_digest", "$2a$10$UDKj0P2WjmnbIWLkiqqg5uBM2l/B1ucVjN3PWNUplD5S1Scg3/LsC"], ["created_at", 2016-11-01 17:07:13 UTC], ["updated_at", 2016-11-01 17:07:13 UTC], ["activation_digest", "$2a$10$oH7iagbTpQSLgYk6wdOdS.GuIy6v91re5.JY5Bw0wD6pf2rtexBiK"], ["activated", true], ["activated_at", 2016-11-01 17:07:13 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-4@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Armani Pfeffer"], ["email", "example-4@railstutorial.org"], ["password_digest", "$2a$10$8/pfX6RtdPph0S8c/2V4quqoNXWWwFLqMWcKJTITqRXDOLIIxn1VO"], ["created_at", 2016-11-01 17:07:13 UTC], ["updated_at", 2016-11-01 17:07:13 UTC], ["activation_digest", "$2a$10$p.oDzhn9QMeXPedF2T1si./OgkS7mxjX5y9a6YxrVoSwSyveMkneS"], ["activated", true], ["activated_at", 2016-11-01 17:07:13 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-5@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Miss Manley Price"], ["email", "example-5@railstutorial.org"], ["password_digest", "$2a$10$GbzvbWc2KuXpew9zXRtbQ.zmMUZMXTFPfK1DOSlt6LjGDxns7f7Wm"], ["created_at", 2016-11-01 17:07:13 UTC], ["updated_at", 2016-11-01 17:07:13 UTC], ["activation_digest", "$2a$10$iXrcsi9bknGKeJZOGiK/r.UXY2qjCR34BdEdNezRGwUD7c0nN71xS"], ["activated", true], ["activated_at", 2016-11-01 17:07:13 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-6@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Nels Kuvalis"], ["email", "example-6@railstutorial.org"], ["password_digest", "$2a$10$1/UPnVd0gyuiERcQA.SMQujqXljJXN1NcCZ5ZYl27XsvXTvlwhjVG"], ["created_at", 2016-11-01 17:07:13 UTC], ["updated_at", 2016-11-01 17:07:13 UTC], ["activation_digest", "$2a$10$tIhEi07YCKKSw7JqrVhIxeM0dOHXuNpr394KwHis130w3vzTlKTGy"], ["activated", true], ["activated_at", 2016-11-01 17:07:13 UTC]]
+  [1m[35m (4.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-7@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Madelyn Marvin"], ["email", "example-7@railstutorial.org"], ["password_digest", "$2a$10$YNvCNx3I7LRDJLCO5RvfZ.eCBhp5QtnkfN/JxLu9lg.cm6EwZp3rG"], ["created_at", 2016-11-01 17:07:13 UTC], ["updated_at", 2016-11-01 17:07:13 UTC], ["activation_digest", "$2a$10$/RlUwwDb4gDEnM5rWnB00.gUm5lSMcU9fAnd0ZEMtuQ2VXxJN23lS"], ["activated", true], ["activated_at", 2016-11-01 17:07:13 UTC]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-8@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Dewayne Hoppe"], ["email", "example-8@railstutorial.org"], ["password_digest", "$2a$10$Th2aT/js7Hwxn.HU6jMUFO0pVuzLH0u1gLPsbGVx3LPjLUnoWTJg."], ["created_at", 2016-11-01 17:07:13 UTC], ["updated_at", 2016-11-01 17:07:13 UTC], ["activation_digest", "$2a$10$tcwDirRDgOaH4CWDveLlRuz84jKzrtOWHqhgue9l3RzzD6176cClS"], ["activated", true], ["activated_at", 2016-11-01 17:07:13 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-9@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Tyra O'Keefe"], ["email", "example-9@railstutorial.org"], ["password_digest", "$2a$10$Kh85ZuOHkSuUYGYqC2ToleEw4i2d4aCbF/iJ0RDkU0gi/r.hCkQn6"], ["created_at", 2016-11-01 17:07:14 UTC], ["updated_at", 2016-11-01 17:07:14 UTC], ["activation_digest", "$2a$10$Z6Y6fga6mhBBs19L5NjtVeFkUnD6O1XYyC./WB.5NzMTOHINHW74W"], ["activated", true], ["activated_at", 2016-11-01 17:07:13 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-10@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Dr. Sydney Farrell"], ["email", "example-10@railstutorial.org"], ["password_digest", "$2a$10$1HHG8o4NtZc/rHiM9waHCOR/aCYAdHRET8VXKPh.kLMY2S8ndgWxm"], ["created_at", 2016-11-01 17:07:14 UTC], ["updated_at", 2016-11-01 17:07:14 UTC], ["activation_digest", "$2a$10$lYPg8lIjju9XIoEto4et/eRNMrvXoPPSdIQJKbij3s3dD2EN7.uy2"], ["activated", true], ["activated_at", 2016-11-01 17:07:14 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-11@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Mr. Grady Torphy"], ["email", "example-11@railstutorial.org"], ["password_digest", "$2a$10$24Ocyc3If5Ui0HEBPnzBl.xl/TbbtXXZ4KOxSVKiQIS/gFWdJBA5C"], ["created_at", 2016-11-01 17:07:14 UTC], ["updated_at", 2016-11-01 17:07:14 UTC], ["activation_digest", "$2a$10$6PwdcnGKqUqXwX8Ulg9qFePmNCqECnJ2qcLwNIm17YMPKRnwGwl.S"], ["activated", true], ["activated_at", 2016-11-01 17:07:14 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-12@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Emmet Cummings"], ["email", "example-12@railstutorial.org"], ["password_digest", "$2a$10$9Dti51RHAtILrAqlt3hb/OsAC9y81s2xP8z0dSm2jpQl4J6aWOvF6"], ["created_at", 2016-11-01 17:07:14 UTC], ["updated_at", 2016-11-01 17:07:14 UTC], ["activation_digest", "$2a$10$INXJ1xwaC.kcLMI5r0digeRtPLwu.DcLOIN.svCNu.ZSys6JdvRx6"], ["activated", true], ["activated_at", 2016-11-01 17:07:14 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-13@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Miss Randall Leuschke"], ["email", "example-13@railstutorial.org"], ["password_digest", "$2a$10$puFw7ZbUdoLdjzrmzLDGsO6JPJE3yGq1PJxfVo/ZkubmTDf3x2lK2"], ["created_at", 2016-11-01 17:07:14 UTC], ["updated_at", 2016-11-01 17:07:14 UTC], ["activation_digest", "$2a$10$NcFSpt15jLE7XBMTSv0mM.11GJATrOFicmzwtCzDsJyWH/1GFPXcG"], ["activated", true], ["activated_at", 2016-11-01 17:07:14 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-14@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Estelle Labadie"], ["email", "example-14@railstutorial.org"], ["password_digest", "$2a$10$Wt.vye.j/HzfRlVAkT1J8OKjdlI890/qCnyhhEfADaUWkHWzchtsq"], ["created_at", 2016-11-01 17:07:14 UTC], ["updated_at", 2016-11-01 17:07:14 UTC], ["activation_digest", "$2a$10$xNKaJxPL4frY1vjTEmatR.Ul8Ucst5z350YDSzCrpSalB8qWp.F7m"], ["activated", true], ["activated_at", 2016-11-01 17:07:14 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-15@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Kiley Kirlin PhD"], ["email", "example-15@railstutorial.org"], ["password_digest", "$2a$10$NtdRtdeCFB7dOa3ywCqBOuwSUGkMobwS0KNNwK62/HSo.wl6luDNq"], ["created_at", 2016-11-01 17:07:14 UTC], ["updated_at", 2016-11-01 17:07:14 UTC], ["activation_digest", "$2a$10$x0UiVdZf9h.GmEo5PQSslO4ZMZIY/eleQaorFu4fihJwMrJuYA5qq"], ["activated", true], ["activated_at", 2016-11-01 17:07:14 UTC]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-16@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jackie Rippin"], ["email", "example-16@railstutorial.org"], ["password_digest", "$2a$10$lR7BLGPYKNWzZl3r57Fe7eKN9o8p98HT60kfo3DkSiSxghVdkY9ey"], ["created_at", 2016-11-01 17:07:15 UTC], ["updated_at", 2016-11-01 17:07:15 UTC], ["activation_digest", "$2a$10$q1Da3mak7kgwBUjaB2Ob3.NczuiFJsaDKzBPOj.M0Mp8mef1Q9hmG"], ["activated", true], ["activated_at", 2016-11-01 17:07:15 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-17@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Ms. Karianne Ernser"], ["email", "example-17@railstutorial.org"], ["password_digest", "$2a$10$AcVy7Kae9/v5ogt04mlLs.uPimD56VrCZTr5AWnPELZQsOSaLY5sS"], ["created_at", 2016-11-01 17:07:15 UTC], ["updated_at", 2016-11-01 17:07:15 UTC], ["activation_digest", "$2a$10$1AJOxnwCp4npAJchiFPA/.gimyOaM8gNjiOtl5BDUbLuV3jT.22ji"], ["activated", true], ["activated_at", 2016-11-01 17:07:15 UTC]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-18@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jeramie Wilderman"], ["email", "example-18@railstutorial.org"], ["password_digest", "$2a$10$hi72OwsIyZT4KUZe.febVew1nUE.7FjOW4psYkXWsU7Rn.Fzh0KKC"], ["created_at", 2016-11-01 17:07:15 UTC], ["updated_at", 2016-11-01 17:07:15 UTC], ["activation_digest", "$2a$10$vuAuL8z7vc.lDJqmxIuXKeab/lcjDUM4H6epqzzK9Rk5dqGxiux/u"], ["activated", true], ["activated_at", 2016-11-01 17:07:15 UTC]]
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-19@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Retha Stracke"], ["email", "example-19@railstutorial.org"], ["password_digest", "$2a$10$z7rnbZe0lBg.hkJpZUPybuw8cGj.weZZYOHom0YI2aDEBQeQDV1P6"], ["created_at", 2016-11-01 17:07:15 UTC], ["updated_at", 2016-11-01 17:07:15 UTC], ["activation_digest", "$2a$10$wN0M8GaWpFKlAyjd/iIFwuh/Lflse0gCtYkiVXvCLuuNIeGwC5x7y"], ["activated", true], ["activated_at", 2016-11-01 17:07:15 UTC]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-20@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Christopher Kemmer"], ["email", "example-20@railstutorial.org"], ["password_digest", "$2a$10$.zwfBOH9vEyCY0UX9/OLVulEbwuSnXxs6KgwYD/WEy/ZEgTshvlKC"], ["created_at", 2016-11-01 17:07:15 UTC], ["updated_at", 2016-11-01 17:07:15 UTC], ["activation_digest", "$2a$10$fzwddbFvVTeA/FXdcRDJjOkiaQO/7CXbtN7n.UEnvq11sZHDvSkhu"], ["activated", true], ["activated_at", 2016-11-01 17:07:15 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-21@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Vern Schinner"], ["email", "example-21@railstutorial.org"], ["password_digest", "$2a$10$kiLdI30wA5CANICi72ANGODd/hS4NTELylTRoySYOZAaqQakg0Ymu"], ["created_at", 2016-11-01 17:07:15 UTC], ["updated_at", 2016-11-01 17:07:15 UTC], ["activation_digest", "$2a$10$1PX7uUPJjCLnimE3t1LtrObWIyc7QOTWruuTRPBtTpUq4S6eM0MpG"], ["activated", true], ["activated_at", 2016-11-01 17:07:15 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-22@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Nannie Borer"], ["email", "example-22@railstutorial.org"], ["password_digest", "$2a$10$/UbLorhF3kcTU3cdPGpoyekrOoaxRgKABFXAwt3ARj13rSiveDNmG"], ["created_at", 2016-11-01 17:07:16 UTC], ["updated_at", 2016-11-01 17:07:16 UTC], ["activation_digest", "$2a$10$x3RCX8U00acUfh9H2Gnf.u2nmRv6Z20fBaDGLmWk6/rB/wZoMeHrG"], ["activated", true], ["activated_at", 2016-11-01 17:07:15 UTC]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-23@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Claud Abernathy DDS"], ["email", "example-23@railstutorial.org"], ["password_digest", "$2a$10$jtgPWj3zvswA38SK7iS8VOZUjoSYkgxd9Aa.tT4YxTYd9bID.B9Nu"], ["created_at", 2016-11-01 17:07:16 UTC], ["updated_at", 2016-11-01 17:07:16 UTC], ["activation_digest", "$2a$10$8SBMHxRH/M2ZdHD0loVjY.m8yGIvbRPfBItSj3dwEOX5q4S4T2is6"], ["activated", true], ["activated_at", 2016-11-01 17:07:16 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-24@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Hortense Wisoky"], ["email", "example-24@railstutorial.org"], ["password_digest", "$2a$10$9DYb3tVR548i5Bmhy4Qc8OgX2wfh.d/Wl/jY/nTQerWD8CwcDT9dK"], ["created_at", 2016-11-01 17:07:16 UTC], ["updated_at", 2016-11-01 17:07:16 UTC], ["activation_digest", "$2a$10$VrcamJPbzPTIlLZtG3eZwuW8TlCvOMMPcxC2Y17UGrmorTjYKTSbq"], ["activated", true], ["activated_at", 2016-11-01 17:07:16 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-25@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jeffery Corkery"], ["email", "example-25@railstutorial.org"], ["password_digest", "$2a$10$plAA.xjCk9kgkS2VhIf8u.65fEg/8mvLwZRwRIz7ACBHXLnRn4Hl."], ["created_at", 2016-11-01 17:07:16 UTC], ["updated_at", 2016-11-01 17:07:16 UTC], ["activation_digest", "$2a$10$YiAq9AAIqCwuRIPoZ6XgA.0gbqqAh/lh6N7XWhllmJGPwXBSVdsNO"], ["activated", true], ["activated_at", 2016-11-01 17:07:16 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-26@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Humberto Jaskolski"], ["email", "example-26@railstutorial.org"], ["password_digest", "$2a$10$hARQDcc.BsdPLRrj/S052eZEIKCHr31WIvQQ5vEhW6oenQn1MjOg."], ["created_at", 2016-11-01 17:07:16 UTC], ["updated_at", 2016-11-01 17:07:16 UTC], ["activation_digest", "$2a$10$C8fvEAafUEGXfGiZszKwU.hhkQuJEuUW25imHO3F8hheaEbTu07DW"], ["activated", true], ["activated_at", 2016-11-01 17:07:16 UTC]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-27@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Nicolette Johnson"], ["email", "example-27@railstutorial.org"], ["password_digest", "$2a$10$sQzX7l3f19J9QcMcYM3fjueQxBe3v810vox1W.XOdwx2DAJFweSFa"], ["created_at", 2016-11-01 17:07:16 UTC], ["updated_at", 2016-11-01 17:07:16 UTC], ["activation_digest", "$2a$10$Iu9OlqxJlUmZuSo3Fg1.ZONUOd7oEgd7cE2c0ys07meoMQQWZdWVi"], ["activated", true], ["activated_at", 2016-11-01 17:07:16 UTC]]
+  [1m[35m (5.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-28@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jennyfer Mertz DVM"], ["email", "example-28@railstutorial.org"], ["password_digest", "$2a$10$gQGUJi0PuEew9krn.PO8BuqhL8VYuARTDSeuyUUa5LAzzwJkic6BS"], ["created_at", 2016-11-01 17:07:16 UTC], ["updated_at", 2016-11-01 17:07:16 UTC], ["activation_digest", "$2a$10$6C0zkx6ekZB/d3klwbKd0u/sjuE5q978PU/YyCEQc1If7SqKF7UnO"], ["activated", true], ["activated_at", 2016-11-01 17:07:16 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-29@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Guiseppe Roob"], ["email", "example-29@railstutorial.org"], ["password_digest", "$2a$10$e6JR4kfeX5R06QbCBZUwke0/isAaWy/vQlnf0po6AqLMN6w4saAAS"], ["created_at", 2016-11-01 17:07:17 UTC], ["updated_at", 2016-11-01 17:07:17 UTC], ["activation_digest", "$2a$10$XXbPg3zhpTuelnSSIcSlZumCUwN1WlQAXR.RxaAobQkl4VC.KkAqm"], ["activated", true], ["activated_at", 2016-11-01 17:07:17 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-30@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jayde Ratke"], ["email", "example-30@railstutorial.org"], ["password_digest", "$2a$10$0xS7zHoBAhOSF3hu7ZRGIuaU4nFld8Hxnr754ECJszxE7Zh5MS0Y2"], ["created_at", 2016-11-01 17:07:17 UTC], ["updated_at", 2016-11-01 17:07:17 UTC], ["activation_digest", "$2a$10$6.jRfe3PwAQYd1b2nKJQzegZ5kDzGLuNA6QIh7fIcXXs4Uo9QxMVO"], ["activated", true], ["activated_at", 2016-11-01 17:07:17 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-31@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Orville Schimmel"], ["email", "example-31@railstutorial.org"], ["password_digest", "$2a$10$Pbjx2WoP8URpODpRBbGsL.AWQ3l2Xi7jqfqAX2Mx0fGJ17SMbEg16"], ["created_at", 2016-11-01 17:07:17 UTC], ["updated_at", 2016-11-01 17:07:17 UTC], ["activation_digest", "$2a$10$Q6wIu/VcgjYVRSogVchBcuap0uZxr.wGlF8EA4CnAPCL4ESCjbNR2"], ["activated", true], ["activated_at", 2016-11-01 17:07:17 UTC]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-32@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Ivy Deckow"], ["email", "example-32@railstutorial.org"], ["password_digest", "$2a$10$5ouLAVQYVaNPYIRn.o5aCuKLhRCmHjK2bjPPL/XIFmlAaD3O2adQu"], ["created_at", 2016-11-01 17:07:17 UTC], ["updated_at", 2016-11-01 17:07:17 UTC], ["activation_digest", "$2a$10$O.Q5v1jK8SKPWL5PyISL9./IGIeOlMnDYqrsS/mh9rSaKMSlImRxy"], ["activated", true], ["activated_at", 2016-11-01 17:07:17 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-33@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Selena Luettgen"], ["email", "example-33@railstutorial.org"], ["password_digest", "$2a$10$fgV2HelD5O.Ju6zmmlbfMeLGid/9o5qPCiLhYb6im.HRIq3FOIcx2"], ["created_at", 2016-11-01 17:07:17 UTC], ["updated_at", 2016-11-01 17:07:17 UTC], ["activation_digest", "$2a$10$if.As.OLDd0rqsa1kj0hY.LBfthsydx2fJJcqcYcgQYcnrGgz4Rhq"], ["activated", true], ["activated_at", 2016-11-01 17:07:17 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-34@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Grayson Parisian"], ["email", "example-34@railstutorial.org"], ["password_digest", "$2a$10$e38mMCd7zLLVr297969ugelpctv3t2Cyklxo6IiDiJTgyHWfvnpdi"], ["created_at", 2016-11-01 17:07:17 UTC], ["updated_at", 2016-11-01 17:07:17 UTC], ["activation_digest", "$2a$10$.lxAEJGjtAEmdiIdeyppnet8S56j3cU/KQLavn.rgTv3KVgEPtpbO"], ["activated", true], ["activated_at", 2016-11-01 17:07:17 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-35@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Davion Crooks"], ["email", "example-35@railstutorial.org"], ["password_digest", "$2a$10$JhNqo2VKxUmhH.wWYgZHo.gEwwJrEsGbSDw0xlwqd1aXvfJEpxi/m"], ["created_at", 2016-11-01 17:07:18 UTC], ["updated_at", 2016-11-01 17:07:18 UTC], ["activation_digest", "$2a$10$/uSwetJZDvXhm4S3v6TaBeMYr8FcjjoIOjNZ2CtrLbn3Dl6ion6Ee"], ["activated", true], ["activated_at", 2016-11-01 17:07:17 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-36@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Kassandra Bailey"], ["email", "example-36@railstutorial.org"], ["password_digest", "$2a$10$B9geD/cbnjcndrbOyjUV6eTbCos.0wAZiFcuE17Wv0PJO9YDjb9wi"], ["created_at", 2016-11-01 17:07:18 UTC], ["updated_at", 2016-11-01 17:07:18 UTC], ["activation_digest", "$2a$10$vQ9kki/wWbMUTRwv4JS9jux6acHJJAx5aK0WX1gTEUoRQDKxLiTuO"], ["activated", true], ["activated_at", 2016-11-01 17:07:18 UTC]]
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-37@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Ahmad Quigley"], ["email", "example-37@railstutorial.org"], ["password_digest", "$2a$10$JOPixP7OrpuqmylBGHAYwu.xVAIJxYZSdsx5wThrg866d78rT6zYu"], ["created_at", 2016-11-01 17:07:18 UTC], ["updated_at", 2016-11-01 17:07:18 UTC], ["activation_digest", "$2a$10$Pk75DCrWPkSE5qXdyyPML.Urktvfwo2x210UsiB9QWQTtQG7raEwG"], ["activated", true], ["activated_at", 2016-11-01 17:07:18 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-38@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Betsy Torphy"], ["email", "example-38@railstutorial.org"], ["password_digest", "$2a$10$R5B0VnG0eM89hUzQO3GA.Oz.c.ch.MiJMv7HEGhjmay2Hl1IvqqqK"], ["created_at", 2016-11-01 17:07:18 UTC], ["updated_at", 2016-11-01 17:07:18 UTC], ["activation_digest", "$2a$10$ZTXM225kp3biH44i..IVnOVDiiSGb8AkSU/BruncFU3/itGOGrZoO"], ["activated", true], ["activated_at", 2016-11-01 17:07:18 UTC]]
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-39@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Nestor Cartwright"], ["email", "example-39@railstutorial.org"], ["password_digest", "$2a$10$4EPGiHuWu59tSbmCc6Vct.RYS7QDodxEjtaUB7Bt89qZlQQ7JUj7K"], ["created_at", 2016-11-01 17:07:18 UTC], ["updated_at", 2016-11-01 17:07:18 UTC], ["activation_digest", "$2a$10$0qyqnfikNsujVWK/A9tG9.icQQJykG23jM45fylfwRJO9J7QOyW7C"], ["activated", true], ["activated_at", 2016-11-01 17:07:18 UTC]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-40@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Dr. Demarcus Mante"], ["email", "example-40@railstutorial.org"], ["password_digest", "$2a$10$BgAdlF5vYUUNE7BPgqOFOevEILR/pEPOMmW07mUiIp5H/ApVRnuJG"], ["created_at", 2016-11-01 17:07:18 UTC], ["updated_at", 2016-11-01 17:07:18 UTC], ["activation_digest", "$2a$10$71T/R.MQBg1/qKmjZ2fP5OATYUpjh0w3vWg778HbOLEu4WCDDzPTK"], ["activated", true], ["activated_at", 2016-11-01 17:07:18 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-41@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Mittie Yost"], ["email", "example-41@railstutorial.org"], ["password_digest", "$2a$10$shNgKW1j6a1jW0NyxsWRpOEwlA1W6PGi9/0SNiaHqQSLQ58u87YmW"], ["created_at", 2016-11-01 17:07:18 UTC], ["updated_at", 2016-11-01 17:07:18 UTC], ["activation_digest", "$2a$10$oKuxvFBkrmf/gQcVINCDN.jH/dBehbC6Nv.uIrUuYL3htz6e7iqCq"], ["activated", true], ["activated_at", 2016-11-01 17:07:18 UTC]]
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-42@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Orpha Bartoletti"], ["email", "example-42@railstutorial.org"], ["password_digest", "$2a$10$avR1wZ8h1nlwhpe53QLl5OfWxPdgl36eUOY00hkJsr2gIEmcO2n6u"], ["created_at", 2016-11-01 17:07:19 UTC], ["updated_at", 2016-11-01 17:07:19 UTC], ["activation_digest", "$2a$10$3pffbXyYbM3SxXRDxgZI3uM8lVB20pr39KAU5ygUB1H00twDeTrKG"], ["activated", true], ["activated_at", 2016-11-01 17:07:18 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-43@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Mr. Eloisa Boyle"], ["email", "example-43@railstutorial.org"], ["password_digest", "$2a$10$Plk3YbP6eNZvV9yXtpusve7w88dm3SMDIy6EHlMn2eVBNZr94lseS"], ["created_at", 2016-11-01 17:07:19 UTC], ["updated_at", 2016-11-01 17:07:19 UTC], ["activation_digest", "$2a$10$JC09H5ABJkPaPtcKGLSJ/eiVRK7mhuq0DTmWCSi8oFVd6oTjEv6AS"], ["activated", true], ["activated_at", 2016-11-01 17:07:19 UTC]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-44@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Brianne Flatley"], ["email", "example-44@railstutorial.org"], ["password_digest", "$2a$10$Zd/4fTpsC5pOEggG8zCDCu3jBRgaXxsuOIDCwoEFZonkk4DvTy02i"], ["created_at", 2016-11-01 17:07:19 UTC], ["updated_at", 2016-11-01 17:07:19 UTC], ["activation_digest", "$2a$10$K909rDsorE/cntusmGd5u.9EDJqXXRYwohQu7pEpiFzeKfpLLcaWW"], ["activated", true], ["activated_at", 2016-11-01 17:07:19 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-45@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Oral Spencer"], ["email", "example-45@railstutorial.org"], ["password_digest", "$2a$10$7OXrAG.121kDnBAla8fdZ.cPlZm5zZKsZ2qXC6Wj0VwHD9dSPBOwi"], ["created_at", 2016-11-01 17:07:19 UTC], ["updated_at", 2016-11-01 17:07:19 UTC], ["activation_digest", "$2a$10$uLztblpIyECGiKe9p6WGh.Ab4FIx2h/rYDqPRio.AkRWqjh8niwLa"], ["activated", true], ["activated_at", 2016-11-01 17:07:19 UTC]]
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-46@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Madisyn Metz PhD"], ["email", "example-46@railstutorial.org"], ["password_digest", "$2a$10$vLfeh3.E0qChLcTh266Ly.qP9Svac8oputoQHEa8f8sS0nn6t0uYK"], ["created_at", 2016-11-01 17:07:19 UTC], ["updated_at", 2016-11-01 17:07:19 UTC], ["activation_digest", "$2a$10$l73a9nNtPKzBiFTq.ASomOhAlOvZ08rYcHUbp.NaZRYBgJ6CTXnmu"], ["activated", true], ["activated_at", 2016-11-01 17:07:19 UTC]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-47@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Roel Brakus DDS"], ["email", "example-47@railstutorial.org"], ["password_digest", "$2a$10$6W9Zv/Gw8BfzmhY2GgdlouNiEdXsQdPxwkPcqsl24UQ2UXPgeFcdu"], ["created_at", 2016-11-01 17:07:19 UTC], ["updated_at", 2016-11-01 17:07:19 UTC], ["activation_digest", "$2a$10$v1HUZmQoEK04zwiqsjAkR.W.lxCUzLS64rz5EJH5.7CtmIZBXMan6"], ["activated", true], ["activated_at", 2016-11-01 17:07:19 UTC]]
+  [1m[35m (5.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-48@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Harvey Lynch"], ["email", "example-48@railstutorial.org"], ["password_digest", "$2a$10$lSOr4kneIIWYdv4bFN72wu6a7JiooR2ROvPCPwzYgcjGgvaXg70hW"], ["created_at", 2016-11-01 17:07:19 UTC], ["updated_at", 2016-11-01 17:07:19 UTC], ["activation_digest", "$2a$10$aibcbn2QHAS0gS9OAsKNN.2vBID8W2aKQLuVU/0zD7MtefRBH3tx6"], ["activated", true], ["activated_at", 2016-11-01 17:07:19 UTC]]
+  [1m[35m (5.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-49@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Ari Reichel III"], ["email", "example-49@railstutorial.org"], ["password_digest", "$2a$10$M9MQyKzplXpHka7AbSqULu7a8El1vPQOSwlmXGr.FCxl4NDnnOsMq"], ["created_at", 2016-11-01 17:07:20 UTC], ["updated_at", 2016-11-01 17:07:20 UTC], ["activation_digest", "$2a$10$tDEWPTIcUtMzLYc4m71oJO9sL7reSD5jBVsNXyEnRPbDAM08Dwe7O"], ["activated", true], ["activated_at", 2016-11-01 17:07:20 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-50@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Dustin Pacocha"], ["email", "example-50@railstutorial.org"], ["password_digest", "$2a$10$Fs/g7jJYnJ2i09IgqDwQNOd4QBWqXbETy3aER8tKLeICXU4LvgBD6"], ["created_at", 2016-11-01 17:07:20 UTC], ["updated_at", 2016-11-01 17:07:20 UTC], ["activation_digest", "$2a$10$k.F5CgjylKnChfG9s92Ee.H6keQ.YZg5rkcQkjV1GrX/i5YjQttIi"], ["activated", true], ["activated_at", 2016-11-01 17:07:20 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-51@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Theodora Huel II"], ["email", "example-51@railstutorial.org"], ["password_digest", "$2a$10$JA18g5pvB2Id2bIharsFU.KzmIkGhfzcTGLW2DbiIcGOnu/jVE8/S"], ["created_at", 2016-11-01 17:07:20 UTC], ["updated_at", 2016-11-01 17:07:20 UTC], ["activation_digest", "$2a$10$ZrlKykbDGXmsAMSoMPBCueKcCSqfmL3fFUb3VnNVy3wyOLEiQdZTa"], ["activated", true], ["activated_at", 2016-11-01 17:07:20 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-52@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Cleveland Ritchie"], ["email", "example-52@railstutorial.org"], ["password_digest", "$2a$10$pCM1Tsn4qJIbH9x5p742MO2NmJF6jMDvJVcQt9Rw.SBB5Xk0ku33i"], ["created_at", 2016-11-01 17:07:20 UTC], ["updated_at", 2016-11-01 17:07:20 UTC], ["activation_digest", "$2a$10$aPg2F8Q9dnHaWfE/UL.icOH43SrEgPqLBbEin/TRd2BgbVKma9D8G"], ["activated", true], ["activated_at", 2016-11-01 17:07:20 UTC]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-53@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Isai Kunze"], ["email", "example-53@railstutorial.org"], ["password_digest", "$2a$10$hLoQHToOv.wa5EDHP1lwEOqrQZPmN5rf/R5WqsfOMg1Wsb9cyVcS2"], ["created_at", 2016-11-01 17:07:20 UTC], ["updated_at", 2016-11-01 17:07:20 UTC], ["activation_digest", "$2a$10$10DL10C01F9chOJJPhBp9OvrOXiukA0VTNlikLn2eWSH2QymPFtbi"], ["activated", true], ["activated_at", 2016-11-01 17:07:20 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-54@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Miss Betsy Schmeler"], ["email", "example-54@railstutorial.org"], ["password_digest", "$2a$10$Fo74g8Dv/Tn0nSmYyjWz/uFJaoFD1rBwX/j3KSZAG3qTk36d5AriG"], ["created_at", 2016-11-01 17:07:20 UTC], ["updated_at", 2016-11-01 17:07:20 UTC], ["activation_digest", "$2a$10$S1JP8SWvMR7O87k/rn7EDOKyqv26QCyUrkHHcVjFojNLKfW6MvNOC"], ["activated", true], ["activated_at", 2016-11-01 17:07:20 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-55@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Maxime Spinka Sr."], ["email", "example-55@railstutorial.org"], ["password_digest", "$2a$10$P3hCNuGXOxsNIJvSuZ.WUO2L4s/ISRZfQIMCecTf9H1TAkGN4KgDy"], ["created_at", 2016-11-01 17:07:21 UTC], ["updated_at", 2016-11-01 17:07:21 UTC], ["activation_digest", "$2a$10$B4W6NQ/tdOPRykMpYpzFi.NEr6VGtYpZmJ247jSjTyuAq9rCw9MAe"], ["activated", true], ["activated_at", 2016-11-01 17:07:20 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-56@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Judy Herman"], ["email", "example-56@railstutorial.org"], ["password_digest", "$2a$10$d01O84bqg1hLfQvDmYW.b.9se9XJ8TeUVQC7ZFCLOhfiXqgHFKQN2"], ["created_at", 2016-11-01 17:07:21 UTC], ["updated_at", 2016-11-01 17:07:21 UTC], ["activation_digest", "$2a$10$uCQfed8AdRJWoynCopd.ouMXzo.CLB8QnVcVR4InpSf330IZTpxme"], ["activated", true], ["activated_at", 2016-11-01 17:07:21 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-57@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Keagan Dibbert"], ["email", "example-57@railstutorial.org"], ["password_digest", "$2a$10$E6NYqaslcinIrJHHvAx7CuOMOEGwgLJweEzTfCMLsaLNH6/UncOW2"], ["created_at", 2016-11-01 17:07:21 UTC], ["updated_at", 2016-11-01 17:07:21 UTC], ["activation_digest", "$2a$10$6HSmJHihCgM.OSvg90NOHOCOrPitXhxmbXGntwA9/tJxhIdiH3Wvu"], ["activated", true], ["activated_at", 2016-11-01 17:07:21 UTC]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-58@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Eloy Kling"], ["email", "example-58@railstutorial.org"], ["password_digest", "$2a$10$btBpgj0inxkzLaT6O.Afy.CE7ra8CzXjUA5b8KGvkyq6PpQ.Bj6Xy"], ["created_at", 2016-11-01 17:07:21 UTC], ["updated_at", 2016-11-01 17:07:21 UTC], ["activation_digest", "$2a$10$tLDQMXkl3WIEsN1SCH.s7uX0YbqBMK9LD8HxGrUumVxmfZQFHbzUW"], ["activated", true], ["activated_at", 2016-11-01 17:07:21 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-59@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Karelle Wisozk"], ["email", "example-59@railstutorial.org"], ["password_digest", "$2a$10$oM7qXHrV.HhPTspVD6eN0uXv2awbLsPIBKjpvUdjcEso6GaBsn7rO"], ["created_at", 2016-11-01 17:07:21 UTC], ["updated_at", 2016-11-01 17:07:21 UTC], ["activation_digest", "$2a$10$KmOSRw4z0Fq5bx.N2YT6ruVR7t3wPyD0BzpvpNMWa1aXKUuIloEIO"], ["activated", true], ["activated_at", 2016-11-01 17:07:21 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-60@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Ole Gleichner"], ["email", "example-60@railstutorial.org"], ["password_digest", "$2a$10$T6iQedjqHu9.e.wcxlYd.ebNFF8itHcKCkmGohBSgci3ny7/EYQYi"], ["created_at", 2016-11-01 17:07:21 UTC], ["updated_at", 2016-11-01 17:07:21 UTC], ["activation_digest", "$2a$10$lJMuZ2ZcG7zE.zOcrW5mT.L1LJQULiT7wSlFuEEW/M/9F2WGgZheC"], ["activated", true], ["activated_at", 2016-11-01 17:07:21 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-61@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Thelma Purdy"], ["email", "example-61@railstutorial.org"], ["password_digest", "$2a$10$mAOf.u3IVOaTQRoO7M7DeO.c.mFDMh14DZMOnMjSKMY7pa7psnvWC"], ["created_at", 2016-11-01 17:07:21 UTC], ["updated_at", 2016-11-01 17:07:21 UTC], ["activation_digest", "$2a$10$SOojGP91ILe8R/vOT3C9tubhVV8jnArwoVtxMbhFP2bs1ovH4b5bi"], ["activated", true], ["activated_at", 2016-11-01 17:07:21 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-62@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Dimitri Welch"], ["email", "example-62@railstutorial.org"], ["password_digest", "$2a$10$0Z.6mR6USVDrTA/BOXPz1.huoBalVSJvTzvhC5K7JSreDj6jzVSBG"], ["created_at", 2016-11-01 17:07:22 UTC], ["updated_at", 2016-11-01 17:07:22 UTC], ["activation_digest", "$2a$10$sOHAJSkIF0xbvsswZIrTIOJUvGAnsH0gaE2Rzv0uvI/iQTWlEzUmW"], ["activated", true], ["activated_at", 2016-11-01 17:07:22 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-63@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Levi Nitzsche"], ["email", "example-63@railstutorial.org"], ["password_digest", "$2a$10$jZTLAhcRqF3B938Fz6K4meiS/nodQa/l3i0JPuVhHJAQcCPVRK/Q."], ["created_at", 2016-11-01 17:07:22 UTC], ["updated_at", 2016-11-01 17:07:22 UTC], ["activation_digest", "$2a$10$sE3dBn.rxgrcTDvE4MEpcuqd436DWJu5rPqUgP30DZi5JzynRDsle"], ["activated", true], ["activated_at", 2016-11-01 17:07:22 UTC]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-64@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Freda Larkin"], ["email", "example-64@railstutorial.org"], ["password_digest", "$2a$10$ncEmTbLe1q55rDQ/z6hNMePEuDCjzumQq6vo8Kblc8GAyqewzR2NC"], ["created_at", 2016-11-01 17:07:22 UTC], ["updated_at", 2016-11-01 17:07:22 UTC], ["activation_digest", "$2a$10$HUnPlg7SZYn7fV7weZXOeeYjyOmd0iSPyXPHuYdv0h38OvF1VDvKy"], ["activated", true], ["activated_at", 2016-11-01 17:07:22 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-65@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Garth Dach"], ["email", "example-65@railstutorial.org"], ["password_digest", "$2a$10$o/bUTbOkqVCAJFy8XkbtX.g4dKp5BbmrXyX0AY/hjKPO6NB1zo0XK"], ["created_at", 2016-11-01 17:07:22 UTC], ["updated_at", 2016-11-01 17:07:22 UTC], ["activation_digest", "$2a$10$egULPzpiXXXw036ponP0v.kpGARCAHP5eV0Uu9I9iVAidb31El1ey"], ["activated", true], ["activated_at", 2016-11-01 17:07:22 UTC]]
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-66@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Natasha Bailey"], ["email", "example-66@railstutorial.org"], ["password_digest", "$2a$10$.Y/5JbYZ1OHpXMsOTt5hNub2mzSwg66txM.AXHduCDKQ.1JqeJhvC"], ["created_at", 2016-11-01 17:07:22 UTC], ["updated_at", 2016-11-01 17:07:22 UTC], ["activation_digest", "$2a$10$MU9dhhVReNfJgsTIo/eolOjFyRiBpScggZpSDajajyivlVvFiU1/6"], ["activated", true], ["activated_at", 2016-11-01 17:07:22 UTC]]
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-67@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Heaven Satterfield"], ["email", "example-67@railstutorial.org"], ["password_digest", "$2a$10$18BLR2LnckwqvGk0Awa7sOZYHl42Rk/bOpPRNHgjomgQ70FLXpAhq"], ["created_at", 2016-11-01 17:07:22 UTC], ["updated_at", 2016-11-01 17:07:22 UTC], ["activation_digest", "$2a$10$Yc0yXJTcqGFvn6XiAUiEfeY.fcv60v3L5Abgzg6S/FgdHp12tTuwK"], ["activated", true], ["activated_at", 2016-11-01 17:07:22 UTC]]
+  [1m[35m (6.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-68@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Lenna Jacobson"], ["email", "example-68@railstutorial.org"], ["password_digest", "$2a$10$18IbUHv0RArut68QYwwv2OHPoWpxHlDeodQyZo/gLzkF2Jr1lgfN."], ["created_at", 2016-11-01 17:07:23 UTC], ["updated_at", 2016-11-01 17:07:23 UTC], ["activation_digest", "$2a$10$B.fMBkhCs7JtmbQ6U0xd5eAVBBkL4FOWT46v0qj9NlvDchl1r4K.e"], ["activated", true], ["activated_at", 2016-11-01 17:07:22 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-69@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Alice Hartmann PhD"], ["email", "example-69@railstutorial.org"], ["password_digest", "$2a$10$k69CydpZhVT14Cd2G5DBquhmRa2UGUJDDsOZXQSV0I7PjKeQZuSCy"], ["created_at", 2016-11-01 17:07:23 UTC], ["updated_at", 2016-11-01 17:07:23 UTC], ["activation_digest", "$2a$10$71KZe4n9mn2yLk4PIIQx1edZ1DKFK3qNn3ribOAY5AWA21PbGGDTy"], ["activated", true], ["activated_at", 2016-11-01 17:07:23 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-70@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jarrell Ebert DDS"], ["email", "example-70@railstutorial.org"], ["password_digest", "$2a$10$xO3UjiBB3xonT29adGs1dOdwzWKR5S6OYIbuxPczUG0j3fwfjs1SC"], ["created_at", 2016-11-01 17:07:23 UTC], ["updated_at", 2016-11-01 17:07:23 UTC], ["activation_digest", "$2a$10$5n5xXHzCFNaRtluItSm/0OF65XOUHiubJV.n1d.Z3ZMiLuWsAyePS"], ["activated", true], ["activated_at", 2016-11-01 17:07:23 UTC]]
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-71@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Golden Becker"], ["email", "example-71@railstutorial.org"], ["password_digest", "$2a$10$z/o7fXmFqZi3hUmax6Y4M.BJ344qV9njfFwSzbzQymGMpkKe4g/Hi"], ["created_at", 2016-11-01 17:07:23 UTC], ["updated_at", 2016-11-01 17:07:23 UTC], ["activation_digest", "$2a$10$.s/pb477JhGi9P7tmknN3O.1y3HC2izcQipSPjj0V7i4bZN51NIpu"], ["activated", true], ["activated_at", 2016-11-01 17:07:23 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-72@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Mrs. Aleen Lehner"], ["email", "example-72@railstutorial.org"], ["password_digest", "$2a$10$q3Z.9.59w5PNNVcq4mLzNeBknLlqsAHIrH39Kb3r1aQ68WZaEgEYy"], ["created_at", 2016-11-01 17:07:23 UTC], ["updated_at", 2016-11-01 17:07:23 UTC], ["activation_digest", "$2a$10$7UjjXQSk1yuqOxxAI3klLOR1dWnt6Da5xvmpmph2S9rkTQbi5IcCO"], ["activated", true], ["activated_at", 2016-11-01 17:07:23 UTC]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-73@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Lorenza Crist"], ["email", "example-73@railstutorial.org"], ["password_digest", "$2a$10$vFARBd/CS5IeKiYcRquXyeW.lJjlqw4SfsItcdNEI6WHs4wh4tFrS"], ["created_at", 2016-11-01 17:07:23 UTC], ["updated_at", 2016-11-01 17:07:23 UTC], ["activation_digest", "$2a$10$S2AfIspFC4tw2AkwcQoIresj9f035ZrMl7RGLS6dPfXL6GkknhIdG"], ["activated", true], ["activated_at", 2016-11-01 17:07:23 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-74@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Audrey Brakus"], ["email", "example-74@railstutorial.org"], ["password_digest", "$2a$10$62oWZ95TW9OGBWkY7qfFiOH6qrbyBUynfX9T5HZcufqZjgfe1JgLy"], ["created_at", 2016-11-01 17:07:23 UTC], ["updated_at", 2016-11-01 17:07:23 UTC], ["activation_digest", "$2a$10$Bo76soy.gRK/SdiBUWmWkeCKktL9JKnW.SlSUlxL0kcCUKsqL3ugm"], ["activated", true], ["activated_at", 2016-11-01 17:07:23 UTC]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-75@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jalon Williamson"], ["email", "example-75@railstutorial.org"], ["password_digest", "$2a$10$lDqAbpZ6QjPAKaLIC.b6.eC.RiH5BmeoZMBzOGvoEzk7Fh2uxdj2C"], ["created_at", 2016-11-01 17:07:24 UTC], ["updated_at", 2016-11-01 17:07:24 UTC], ["activation_digest", "$2a$10$PUV8UE9bFM02NGxVCzJRsO7wXPunSR9CoWFijlyc.omnhmP/r36zy"], ["activated", true], ["activated_at", 2016-11-01 17:07:23 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-76@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Johathan Schimmel"], ["email", "example-76@railstutorial.org"], ["password_digest", "$2a$10$j7qa7GUxNZOou8leLSho0OlTb5JwgO5H5Ch6xH8YNeoYybgcDPFY2"], ["created_at", 2016-11-01 17:07:24 UTC], ["updated_at", 2016-11-01 17:07:24 UTC], ["activation_digest", "$2a$10$7oUCjW0D68fSUFqRklnakuUMkczUdxeJgpX3HC7x3XC6NHWZ2PwyG"], ["activated", true], ["activated_at", 2016-11-01 17:07:24 UTC]]
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-77@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Shad Heaney"], ["email", "example-77@railstutorial.org"], ["password_digest", "$2a$10$MEpVUuyG/7gfdcnQmvQgK.da5/CTK68VEqhOJcHPNX0K9bXexznpK"], ["created_at", 2016-11-01 17:07:24 UTC], ["updated_at", 2016-11-01 17:07:24 UTC], ["activation_digest", "$2a$10$BW6g9M7V2DwBhKlf5SW8/O3LHhLG71yE0Jxd62qlrKLLvJBmL7N3a"], ["activated", true], ["activated_at", 2016-11-01 17:07:24 UTC]]
+  [1m[35m (3.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-78@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jesse Rowe"], ["email", "example-78@railstutorial.org"], ["password_digest", "$2a$10$j34ILw8YoLRaGr449/WzoucfWWZthOAdw1YbM2W1DWV.dh5Uqzxyy"], ["created_at", 2016-11-01 17:07:24 UTC], ["updated_at", 2016-11-01 17:07:24 UTC], ["activation_digest", "$2a$10$k/fNCDs5PA1.Eq9r9oOMd.ADHKy35ihKCb7cAHjjq0yRk5a39MuZi"], ["activated", true], ["activated_at", 2016-11-01 17:07:24 UTC]]
+  [1m[35m (5.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-79@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Lucas Tromp"], ["email", "example-79@railstutorial.org"], ["password_digest", "$2a$10$hO1EeH7qH/MDEk669HwXe.WhPsMVeAkJfaBM6r24ddRcMXYRjvBFm"], ["created_at", 2016-11-01 17:07:24 UTC], ["updated_at", 2016-11-01 17:07:24 UTC], ["activation_digest", "$2a$10$INJhNFCrnCcSDva/ItJqIO4bClpA8EUJb51btP/0tKEI1OnHTuoOW"], ["activated", true], ["activated_at", 2016-11-01 17:07:24 UTC]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-80@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Justice Monahan"], ["email", "example-80@railstutorial.org"], ["password_digest", "$2a$10$dPmG5MplxvdYGF4IcNXFte7pIoHxNDGAAbt1DXXazn/coVkY8NPJi"], ["created_at", 2016-11-01 17:07:24 UTC], ["updated_at", 2016-11-01 17:07:24 UTC], ["activation_digest", "$2a$10$K3WL2nHuFJnwpYe3LoVpNe6CI8oCUU/10RzziXJq52w15b1XAiQ/q"], ["activated", true], ["activated_at", 2016-11-01 17:07:24 UTC]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-81@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Richard Becker"], ["email", "example-81@railstutorial.org"], ["password_digest", "$2a$10$Ge3iz3uYU5xl.5Fo4XLAl.wkXW7cLJaXYJdyUDaQBE9/CLTTvv63e"], ["created_at", 2016-11-01 17:07:24 UTC], ["updated_at", 2016-11-01 17:07:24 UTC], ["activation_digest", "$2a$10$cJZR8wIjHpeI2sMTYC23j.5U7Nzn5A3rF4lpl0T2XZBf6ATHPg0Ra"], ["activated", true], ["activated_at", 2016-11-01 17:07:24 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-82@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Ms. Alvis Johnston"], ["email", "example-82@railstutorial.org"], ["password_digest", "$2a$10$20fjdGpgE8vNhGjVlbvN9uCYM6UY2wbLwdW8FY.7S451W4rGRNM7W"], ["created_at", 2016-11-01 17:07:25 UTC], ["updated_at", 2016-11-01 17:07:25 UTC], ["activation_digest", "$2a$10$/ks0KdAZF4VuLcQMMwZ4Z.Ya2R3koizUQwOa4HhAB74IvJ4DF8ZL."], ["activated", true], ["activated_at", 2016-11-01 17:07:25 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-83@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Andre Satterfield"], ["email", "example-83@railstutorial.org"], ["password_digest", "$2a$10$M0ipsTA8isEWLlxpJWiQMu5VsIsHWyn26qJ7sLLISned2rhy7lJ1y"], ["created_at", 2016-11-01 17:07:25 UTC], ["updated_at", 2016-11-01 17:07:25 UTC], ["activation_digest", "$2a$10$hxAUgX69K7CQGDb.lJDrGeKmk40Z6u/tuN9KMnqlnlvKCV8D5LXpq"], ["activated", true], ["activated_at", 2016-11-01 17:07:25 UTC]]
+  [1m[35m (3.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-84@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Ford Quitzon"], ["email", "example-84@railstutorial.org"], ["password_digest", "$2a$10$rPEgZsxUnMecpfUcowVx2e0uXJvU0WnAeZbYBRmuUbFK3uOaB2aSW"], ["created_at", 2016-11-01 17:07:25 UTC], ["updated_at", 2016-11-01 17:07:25 UTC], ["activation_digest", "$2a$10$FCthAdzgH4sCf7pY6AfHre0WftWW1mvnXTCMC7QkZbsW.6fwV3mUi"], ["activated", true], ["activated_at", 2016-11-01 17:07:25 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-85@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Clarissa Wiza"], ["email", "example-85@railstutorial.org"], ["password_digest", "$2a$10$0.p0SuN1TquWAQvCTxBEfuJ0QF/RWf1n66cyMPBdnJYkJcZpIbLO6"], ["created_at", 2016-11-01 17:07:25 UTC], ["updated_at", 2016-11-01 17:07:25 UTC], ["activation_digest", "$2a$10$8BZ0mVrAUCKb569yDp1LT.grczT/2w7tU80asqbyGf6Z5KrKspdEe"], ["activated", true], ["activated_at", 2016-11-01 17:07:25 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-86@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Sandy Ebert"], ["email", "example-86@railstutorial.org"], ["password_digest", "$2a$10$tsX/6sDl9Oi52bV9psXWX.K.HUKkPa1JqqskGL8pubMX5A0RU/DkS"], ["created_at", 2016-11-01 17:07:25 UTC], ["updated_at", 2016-11-01 17:07:25 UTC], ["activation_digest", "$2a$10$KYj9ofdrbFTkvD4nws8aQOZssm9lbj5/XoPK3J4QSq1EBVdzoJOA6"], ["activated", true], ["activated_at", 2016-11-01 17:07:25 UTC]]
+  [1m[35m (19.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-87@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jude Greenfelder"], ["email", "example-87@railstutorial.org"], ["password_digest", "$2a$10$VnHTemHkuvQ8ALcjTWy0BeBPmkyPBkaPAvY6ZmQS7OTbRxyt4fK9e"], ["created_at", 2016-11-01 17:07:25 UTC], ["updated_at", 2016-11-01 17:07:25 UTC], ["activation_digest", "$2a$10$eWJQZxI5AoJp4rhlK9roWeXCAFLLZhhvm2ovbxZdBasfR9B9Tk3mW"], ["activated", true], ["activated_at", 2016-11-01 17:07:25 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-88@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Yessenia Jaskolski"], ["email", "example-88@railstutorial.org"], ["password_digest", "$2a$10$YsKchadNKIYmubiUbvo2req.GNRqaydn1Z3BhbsnQ4rpSveZBqC4e"], ["created_at", 2016-11-01 17:07:26 UTC], ["updated_at", 2016-11-01 17:07:26 UTC], ["activation_digest", "$2a$10$hQzpvq4yGe04RJbZKFUb/eSCH/a11lRLsFqlaJJSSp8n2kDEiTx7i"], ["activated", true], ["activated_at", 2016-11-01 17:07:25 UTC]]
+  [1m[35m (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-89@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Madison Schaefer"], ["email", "example-89@railstutorial.org"], ["password_digest", "$2a$10$.QDXyf63LSzyN7IdmQ3cJeKEz8yvUQbQ96PP1MKeOpQPfKkRQsPju"], ["created_at", 2016-11-01 17:07:26 UTC], ["updated_at", 2016-11-01 17:07:26 UTC], ["activation_digest", "$2a$10$jc/lff2JRe1JIYnB.UjCx.IACr7r35mfKXskKCKJn6oqGKxNNeabS"], ["activated", true], ["activated_at", 2016-11-01 17:07:26 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-90@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Brycen Swaniawski"], ["email", "example-90@railstutorial.org"], ["password_digest", "$2a$10$V0GFT6UAN2tnpKzd5JWbb.bQ0O2otBiIsqr2OGFjd5Dz.lyK9CfZ2"], ["created_at", 2016-11-01 17:07:26 UTC], ["updated_at", 2016-11-01 17:07:26 UTC], ["activation_digest", "$2a$10$XrSo6nMEUaXYwuH5.ugRwONjr0wkPD5HUv5E2ezZfCBnsVPL9H1eG"], ["activated", true], ["activated_at", 2016-11-01 17:07:26 UTC]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-91@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Nya Mills"], ["email", "example-91@railstutorial.org"], ["password_digest", "$2a$10$osG9GWywh2QFxsIi31kRmOoiXG2yhsdfhvU6xaFF12ZWGrV./UIju"], ["created_at", 2016-11-01 17:07:26 UTC], ["updated_at", 2016-11-01 17:07:26 UTC], ["activation_digest", "$2a$10$8kSkVfExRLnRPWUhuM3JeOmexL7wb315jKNCx1k85dANzfitIg1r."], ["activated", true], ["activated_at", 2016-11-01 17:07:26 UTC]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-92@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Stanford Weimann"], ["email", "example-92@railstutorial.org"], ["password_digest", "$2a$10$4HNeIdJvIDatc5T5uYUOB.tUyN1Zp9i3m8eHPoKOtxqLt15mfXhHS"], ["created_at", 2016-11-01 17:07:26 UTC], ["updated_at", 2016-11-01 17:07:26 UTC], ["activation_digest", "$2a$10$3Vu28RKhkTeSh05V24cUX.3zyFXePCY2m0aZFNqEHcCSKgHo./83a"], ["activated", true], ["activated_at", 2016-11-01 17:07:26 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-93@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Lowell Nader PhD"], ["email", "example-93@railstutorial.org"], ["password_digest", "$2a$10$itjnhEoYkIYX/jMkbpHgW.2AtFv9uNBpzd1RXu5tMCPjIRZM73ECa"], ["created_at", 2016-11-01 17:07:26 UTC], ["updated_at", 2016-11-01 17:07:26 UTC], ["activation_digest", "$2a$10$ZMEqbNxhzBn65zt3Y1b.yurFKYbIkz5szNSh1kOZHZ4LZ727df5BS"], ["activated", true], ["activated_at", 2016-11-01 17:07:26 UTC]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-94@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Weldon Mohr"], ["email", "example-94@railstutorial.org"], ["password_digest", "$2a$10$WLcnlhSrJR5hvs3YWFsuFeSoBuB6JQ1dwTim7NvYkWNkQIhBqEeTW"], ["created_at", 2016-11-01 17:07:26 UTC], ["updated_at", 2016-11-01 17:07:26 UTC], ["activation_digest", "$2a$10$wX/gzsvTtaowaC9NtxA6tOZnD4PFWcn8hdv90xhfbGd/8h9Ruvo7W"], ["activated", true], ["activated_at", 2016-11-01 17:07:26 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-95@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Araceli Halvorson"], ["email", "example-95@railstutorial.org"], ["password_digest", "$2a$10$R3rAZi6.TsysZwX/QAPRuOXkouIglDs5naZG1u6i3DfjZykR/B/3K"], ["created_at", 2016-11-01 17:07:27 UTC], ["updated_at", 2016-11-01 17:07:27 UTC], ["activation_digest", "$2a$10$E8d6HvW.I9dUI8CPkA9Z1uxM2vvKlwTORI9RsW2.UXW.wORSYIG2e"], ["activated", true], ["activated_at", 2016-11-01 17:07:27 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-96@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Vito Stoltenberg"], ["email", "example-96@railstutorial.org"], ["password_digest", "$2a$10$xSRf1FdjuNrVAs4zwds.0egMLHi1TJj93FgHwVi1ScRNlzE/zBeVO"], ["created_at", 2016-11-01 17:07:27 UTC], ["updated_at", 2016-11-01 17:07:27 UTC], ["activation_digest", "$2a$10$lE3pJHKnPaPSJObpG75aBO/Eb92dFPr22cI8XWaaM3Mzu1f0pvzli"], ["activated", true], ["activated_at", 2016-11-01 17:07:27 UTC]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-97@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Virgie Schiller"], ["email", "example-97@railstutorial.org"], ["password_digest", "$2a$10$H0ix4GJitEto4T73Ql.OX.q4veppKskr2i/gpRQ0Do42dAsKNL1ja"], ["created_at", 2016-11-01 17:07:27 UTC], ["updated_at", 2016-11-01 17:07:27 UTC], ["activation_digest", "$2a$10$9MUbFeC1YwPpbEVP2wHMy.p2/6VpvE3dBWpF.TIbMY/YYILEmH1zS"], ["activated", true], ["activated_at", 2016-11-01 17:07:27 UTC]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-98@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Miss Schuyler Hartmann"], ["email", "example-98@railstutorial.org"], ["password_digest", "$2a$10$v/QntOp6eR0GqelAvUIUpOwNLHxPmXlbnsyL6RIelDjboogicfP4G"], ["created_at", 2016-11-01 17:07:27 UTC], ["updated_at", 2016-11-01 17:07:27 UTC], ["activation_digest", "$2a$10$Ijg//8LVeYuJXN7dYQ/BaOMv3HVLObGTq8mThLtctXyRtyThUu2CS"], ["activated", true], ["activated_at", 2016-11-01 17:07:27 UTC]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example-99@railstutorial.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest", "activated", "activated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Jonathon Lueilwitz"], ["email", "example-99@railstutorial.org"], ["password_digest", "$2a$10$LTztauVDnOEwIKCJC008JOWDTdUbBZleHJW9swHoYyFImkTzS4.BC"], ["created_at", 2016-11-01 17:07:27 UTC], ["updated_at", 2016-11-01 17:07:27 UTC], ["activation_digest", "$2a$10$Sx/77.0k2hT47cTwrNyFru5D19.dNMouMONfQvmo0OYZCVPGdjNmy"], ["activated", true], ["activated_at", 2016-11-01 17:07:27 UTC]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 10.240.0.204 at 2016-11-01 17:09:48 +0000
+Cannot render console from 10.240.0.204! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (6.8ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (4.1ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 3477ms (Views: 3466.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.240.0.182 at 2016-11-01 17:10:07 +0000
+Cannot render console from 10.240.0.182! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (368.2ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 430ms (Views: 428.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 10.240.1.64 at 2016-11-01 17:10:10 +0000
+Cannot render console from 10.240.1.64! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered shared/_error_messages.html.erb (0.5ms)
+  Rendered users/_form.html.erb (6.3ms)
+  Rendered users/new.html.erb within layouts/application (8.9ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.1ms)
+Completed 200 OK in 99ms (Views: 63.0ms | ActiveRecord: 6.9ms)
+
+
+Started POST "/signup" for 10.240.0.119 at 2016-11-01 17:10:22 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"+l7/4cz90Qn34+QxBXK4xsYAaHlFlK45dC8+Zc5vwqy6UFsJp78KOm/0OxymgwLwG70hTEb5N11K/VB2xskPMg==", "user"=>{"name"=>"Gilmar Filho", "email"=>"gaxf12@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create my account"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "gaxf12@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Gilmar Filho"], ["email", "gaxf12@gmail.com"], ["password_digest", "$2a$10$9sVA1pQVJmGC/rbfcj1GbO6GhCuSEVgJohxInVdcrH/ifCa.0wlnG"], ["created_at", 2016-11-01 17:10:22 UTC], ["updated_at", 2016-11-01 17:10:22 UTC], ["activation_digest", "$2a$10$LJyk8zNNznM/DXXlyWhJ9.qNyvLY4hX3.8YLcLtElvgXXG17KEOxW"]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  Rendering user_mailer/account_activation.html.erb within layouts/mailer
+  Rendered user_mailer/account_activation.html.erb within layouts/mailer (0.5ms)
+  Rendering user_mailer/account_activation.text.erb within layouts/mailer
+  Rendered user_mailer/account_activation.text.erb within layouts/mailer (1.4ms)
+UserMailer#account_activation: processed outbound mail in 168.7ms
+Sent mail to gaxf12@gmail.com (12.3ms)
+Date: Tue, 01 Nov 2016 17:10:23 +0000
+From: noreply@example.com
+To: gaxf12@gmail.com
+Message-ID: <5818cc7f1d29_926243eac0578c9@gilmarfilho-rails-tutorial-3817497.mail>
+Subject: Account activation
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_5818cc7ef3dea_926243eac0577e9";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_5818cc7ef3dea_926243eac0577e9
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<h1>Sample App</h1>
+
+<p>Hi Gilmar Filho,</p>
+
+<p>
+Welcome to the Sample App! Click on the link below to activate your account:
+</p>
+
+<a href="https://localhost:3000/account_activations/6pAidulnxnGjxfWs_3aY7A/edit?email=gaxf12%40gmail.com">Activate</a>
+
+----==_mimepart_5818cc7ef3dea_926243eac0577e9
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <h1>UserMailer#account_activation</h1>
+
+<p>
+  , find me in app/views/user_mailer/account_activation.html.erb
+</p>
+  </body>
+</html>
+
+----==_mimepart_5818cc7ef3dea_926243eac0577e9--
+
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/users/101
+Completed 302 Found in 717ms (ActiveRecord: 39.0ms)
+
+
+Started GET "/users/101" for 10.240.0.119 at 2016-11-01 17:10:23 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"101"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 101], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.9ms)
+
+
+  
+NameError (uninitialized constant UsersController::FILL_IN):
+  
+app/controllers/users_controller.rb:12:in `show'
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (4.7ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (37.6ms)
+Started GET "/signup" for 10.240.0.204 at 2016-11-01 17:10:27 +0000
+Cannot render console from 10.240.0.204! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered shared/_error_messages.html.erb (0.6ms)
+  Rendered users/_form.html.erb (4.9ms)
+  Rendered users/new.html.erb within layouts/application (6.8ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 52ms (Views: 50.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.240.0.110 at 2016-11-01 17:10:31 +0000
+Cannot render console from 10.240.0.110! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.3ms)
+  Rendered layouts/_footer.html.erb (0.7ms)
+Completed 200 OK in 58ms (Views: 47.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.240.0.208 at 2016-11-01 17:11:02 +0000
+Cannot render console from 10.240.0.208! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (7.2ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (4.4ms)
+  Rendered layouts/_footer.html.erb (1.2ms)
+Completed 200 OK in 364ms (Views: 353.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.240.0.182 at 2016-11-01 17:11:07 +0000
+Cannot render console from 10.240.0.182! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (357.8ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 406ms (Views: 404.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.240.1.64 at 2016-11-01 17:11:13 +0000
+Cannot render console from 10.240.1.64! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6xDFjIUd0t6jjgQ7ooDbipdaWFaCogP6Qvqn6wFdJvurHmFk7l8J7TuZ2xYBcWG8SucRY4HPmp58KMn4CfvrZQ==", "session"=>{"email"=>"gaxf12@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "gaxf12@gmail.com"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (2.1ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 219ms (Views: 51.4ms | ActiveRecord: 4.1ms)
+
+
+Started POST "/login" for 10.240.0.241 at 2016-11-01 17:11:18 +0000
+Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"k/c8YxRyfhPOYZXXg1sP1GkqfOx9h7vinhunkE6duJTT+ZiLfzClIFZ2SvogqrXitJc12X7qIoagycmDRjt1Cg==", "session"=>{"email"=>"gaxf12@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "gaxf12@gmail.com"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (2.1ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 118ms (Views: 42.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/login" for 10.240.1.64 at 2016-11-01 17:11:27 +0000
+Cannot render console from 10.240.1.64! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"mEy5PRpC4PMwA2TQkSORBMfKjLTlSvint05QQfm0gtjYQh3VcQA7wKgUu/0y0isyGnfFgeYnYcOJnD5S8RJPRg==", "session"=>{"email"=>"gaxf12@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "gaxf12@gmail.com"], ["LIMIT", 1]]
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/
+Completed 302 Found in 155ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 10.240.0.182 at 2016-11-01 17:11:27 +0000
+Cannot render console from 10.240.0.182! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 44ms (Views: 43.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.240.0.241 at 2016-11-01 17:11:52 +0000
+Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.8ms)
+  Rendered layouts/_shim.html.erb (0.2ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.7ms)
+Completed 200 OK in 145ms (Views: 144.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.240.0.119 at 2016-11-01 17:12:08 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.7ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 42ms (Views: 41.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.240.0.119 at 2016-11-01 17:12:12 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gd9bsGN5kQJXHS4txMkWr/54Aom76vzhHRY2rX+tvZ3B0f9YCDtKMc8K8QBnOKyZI8VLvLiHZYUjxFi+dwtwAw==", "session"=>{"email"=>"example@railstutorial.org", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "example@railstutorial.org"], ["LIMIT", 1]]
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/users/1
+Completed 302 Found in 76ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/users/1" for 10.240.1.20 at 2016-11-01 17:12:12 +0000
+Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.4ms)
+
+
+  
+NameError (uninitialized constant UsersController::FILL_IN):
+  
+app/controllers/users_controller.rb:12:in `show'
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.7ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (27.9ms)
+Started GET "/users/1" for 10.240.1.64 at 2016-11-01 17:12:44 +0000
+Cannot render console from 10.240.1.64! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/
+Completed 302 Found in 27ms (ActiveRecord: 4.7ms)
+
+
+Started GET "/" for 10.240.0.119 at 2016-11-01 17:12:44 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_shim.html.erb (0.5ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_header.html.erb (4.1ms)
+  Rendered layouts/_footer.html.erb (0.7ms)
+Completed 200 OK in 70ms (Views: 67.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/users" for 10.240.1.17 at 2016-11-01 17:12:46 +0000
+Cannot render console from 10.240.1.17! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  Rendered collection of users/_user.html.erb [30 times] (16.9ms)
+  Rendered users/index.html.erb within layouts/application (28.7ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.3ms)
+  Rendered layouts/_footer.html.erb (0.7ms)
+Completed 200 OK in 94ms (Views: 88.2ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/" for 10.240.0.207 at 2016-11-01 17:12:48 +0000
+Cannot render console from 10.240.0.207! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_shim.html.erb (0.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_header.html.erb (2.8ms)
+  Rendered layouts/_footer.html.erb (0.7ms)
+Completed 200 OK in 64ms (Views: 62.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/1" for 10.240.1.32 at 2016-11-01 17:12:56 +0000
+Cannot render console from 10.240.1.32! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 10.240.1.64 at 2016-11-01 17:12:57 +0000
+Cannot render console from 10.240.1.64! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_header.html.erb (2.0ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 45ms (Views: 43.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users" for 10.240.0.119 at 2016-11-01 17:12:58 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  Rendered collection of users/_user.html.erb [30 times] (15.9ms)
+  Rendered users/index.html.erb within layouts/application (87.3ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.4ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 147ms (Views: 143.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/users?page=2" for 10.240.1.64 at 2016-11-01 17:13:03 +0000
+Cannot render console from 10.240.1.64! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#index as HTML
+  Parameters: {"page"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 30]]
+  Rendered collection of users/_user.html.erb [30 times] (14.9ms)
+  Rendered users/index.html.erb within layouts/application (176.4ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 231ms (Views: 227.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/users?page=3" for 10.240.1.17 at 2016-11-01 17:13:04 +0000
+Cannot render console from 10.240.1.17! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#index as HTML
+  Parameters: {"page"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 60]]
+  Rendered collection of users/_user.html.erb [30 times] (21.3ms)
+  Rendered users/index.html.erb within layouts/application (34.0ms)
+  Rendered layouts/_shim.html.erb (0.5ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 191ms (Views: 186.4ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/users?page=4" for 10.240.0.187 at 2016-11-01 17:13:05 +0000
+Cannot render console from 10.240.0.187! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#index as HTML
+  Parameters: {"page"=>"4"}
+  [1m[36mUser Load (97.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 90]]
+  Rendered collection of users/_user.html.erb [11 times] (7.8ms)
+  Rendered users/index.html.erb within layouts/application (15.5ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.7ms)
+Completed 200 OK in 174ms (Views: 73.3ms | ActiveRecord: 98.4ms)
+
+
+Started GET "/help" for 10.240.0.187 at 2016-11-01 17:13:07 +0000
+Cannot render console from 10.240.0.187! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#help as HTML
+  Rendering static_pages/help.html.erb within layouts/application
+  Rendered static_pages/help.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_header.html.erb (67.0ms)
+  Rendered layouts/_footer.html.erb (0.9ms)
+Completed 200 OK in 139ms (Views: 135.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/home" for 10.240.0.119 at 2016-11-01 17:13:09 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_header.html.erb (3.3ms)
+  Rendered layouts/_footer.html.erb (0.8ms)
+Completed 200 OK in 204ms (Views: 201.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/1/edit" for 10.240.0.187 at 2016-11-01 17:13:11 +0000
+Cannot render console from 10.240.0.187! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/edit.html.erb within layouts/application
+  Rendered shared/_error_messages.html.erb (0.9ms)
+  Rendered users/_form.html.erb (6.0ms)
+  Rendered users/edit.html.erb within layouts/application (8.0ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 72ms (Views: 67.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users" for 10.240.1.17 at 2016-11-01 17:13:21 +0000
+Cannot render console from 10.240.1.17! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  Rendered collection of users/_user.html.erb [30 times] (15.4ms)
+  Rendered users/index.html.erb within layouts/application (22.7ms)
+  Rendered layouts/_shim.html.erb (0.8ms)
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.7ms)
+Completed 200 OK in 214ms (Views: 209.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users/2" for 10.240.0.241 at 2016-11-01 17:13:26 +0000
+Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 10.240.0.241 at 2016-11-01 17:13:26 +0000
+Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_header.html.erb (2.0ms)
+  Rendered layouts/_footer.html.erb (0.9ms)
+Completed 200 OK in 52ms (Views: 50.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 10.240.1.17 at 2016-12-23 15:14:47 +0000
+Cannot render console from 10.240.1.17! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+PG::ConnectionBad (could not connect to server: Connection refused
+	Is the server running on host "localhost" (::1) and accepting
+	TCP/IP connections on port 5432?
+could not connect to server: Connection refused
+	Is the server running on host "localhost" (127.0.0.1) and accepting
+	TCP/IP connections on port 5432?
+):
+  
+activerecord (5.0.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:671:in `initialize'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:671:in `new'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:671:in `connect'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:217:in `initialize'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:37:in `new'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:37:in `postgresql_connection'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:721:in `new_connection'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:765:in `checkout_new_connection'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:744:in `try_to_checkout_new_connection'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:705:in `acquire_connection'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:501:in `checkout'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:364:in `connection'
+activerecord (5.0.0.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:875:in `retrieve_connection'
+activerecord (5.0.0.1) lib/active_record/connection_handling.rb:128:in `retrieve_connection'
+activerecord (5.0.0.1) lib/active_record/connection_handling.rb:91:in `connection'
+activerecord (5.0.0.1) lib/active_record/migration.rb:558:in `connection'
+activerecord (5.0.0.1) lib/active_record/migration.rb:545:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.0.1) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.0.1) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.3.1) lib/web_console/middleware.rb:131:in `call_app'
+web-console (3.3.1) lib/web_console/middleware.rb:20:in `block in call'
+web-console (3.3.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.3.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `block in tagged'
+activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `tagged'
+railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.6.0) lib/puma/configuration.rb:225:in `call'
+puma (3.6.0) lib/puma/server.rb:578:in `handle_request'
+puma (3.6.0) lib/puma/server.rb:415:in `process_client'
+puma (3.6.0) lib/puma/server.rb:275:in `block in run'
+puma (3.6.0) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.4ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (38.4ms)
+Started GET "/" for 10.240.0.119 at 2016-12-23 15:15:27 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (7.7ms)
+  Rendered layouts/_shim.html.erb (0.7ms)
+  Rendered layouts/_header.html.erb (5.3ms)
+  Rendered layouts/_footer.html.erb (1.6ms)
+Completed 200 OK in 399ms (Views: 389.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home" for 10.240.0.204 at 2016-12-23 15:15:33 +0000
+Cannot render console from 10.240.0.204! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_shim.html.erb (12.5ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 60ms (Views: 58.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/help" for 10.240.0.179 at 2016-12-23 15:15:34 +0000
+Cannot render console from 10.240.0.179! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#help as HTML
+  Rendering static_pages/help.html.erb within layouts/application
+  Rendered static_pages/help.html.erb within layouts/application (0.5ms)
+  Rendered layouts/_shim.html.erb (0.2ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 41ms (Views: 40.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.240.0.241 at 2016-12-23 15:15:36 +0000
+Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (337.2ms)
+  Rendered layouts/_shim.html.erb (0.2ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 377ms (Views: 375.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 10.240.0.241 at 2016-12-23 15:15:41 +0000
+Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered shared/_error_messages.html.erb (0.4ms)
+  Rendered users/_form.html.erb (3.9ms)
+  Rendered users/new.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 159ms (Views: 136.3ms | ActiveRecord: 6.3ms)
+
+
+Started POST "/signup" for 10.240.0.187 at 2016-12-23 15:15:49 +0000
+Cannot render console from 10.240.0.187! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wk8MQfiwG6NrtM3bqBFW4XhMFLmk/xVKcJjUPvrvRQh8fgVdYieBk9ZLyJdUUIiwZXROC0cOxrtjajFVE+zXUA==", "user"=>{"name"=>"Gilmar Filho", "email"=>"gaxf12@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create my account"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "gaxf12@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered shared/_error_messages.html.erb (0.7ms)
+  Rendered users/_form.html.erb (3.5ms)
+  Rendered users/new.html.erb within layouts/application (4.5ms)
+  Rendered layouts/_shim.html.erb (0.2ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 138ms (Views: 43.3ms | ActiveRecord: 2.5ms)
+
+
+Started POST "/signup" for 10.240.0.69 at 2016-12-23 15:16:03 +0000
+Cannot render console from 10.240.0.69! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jxSkUkCdAEGx3HIQIglo8PQcPzf7XCAj5qZwbyhUMEsxJa1O2gqacQwjd1zeSLah6SRlhRit89L1VJUEwVeiEw==", "user"=>{"name"=>"Gilmar Filho", "email"=>"gaxf@hotmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create my account"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "gaxf@hotmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered shared/_error_messages.html.erb (0.7ms)
+  Rendered users/_form.html.erb (3.7ms)
+  Rendered users/new.html.erb within layouts/application (4.9ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 229ms (Views: 149.9ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/signup" for 10.240.0.207 at 2016-12-23 15:16:09 +0000
+Cannot render console from 10.240.0.207! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"f1UyTbKPkJhPqZ04SbChf8N1aiZsm8W22RJvmQpa3W/BZDtRKBgKqPJWmHS18X8u3k0wlI9qFkfK4Iry41lPNw==", "user"=>{"name"=>"Gilmar Filho", "email"=>"gaxf@hotmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create my account"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "gaxf@hotmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Gilmar Filho"], ["email", "gaxf@hotmail.com"], ["password_digest", "$2a$10$bf1FCq3u2R8uSyYt.swXm.7zYDSTIvhrlJoukgxCRmTWsqBCh9oS."], ["created_at", 2016-12-23 15:16:09 UTC], ["updated_at", 2016-12-23 15:16:09 UTC], ["activation_digest", "$2a$10$YZtTELK20kY0/5CgvRdK.eKZP7./4DzPmE4mUhhIjfuGZQL3r2fUq"]]
+  [1m[35m (5.3ms)[0m  [1m[35mCOMMIT[0m
+  Rendering user_mailer/account_activation.html.erb within layouts/mailer
+  Rendered user_mailer/account_activation.html.erb within layouts/mailer (0.4ms)
+  Rendering user_mailer/account_activation.text.erb within layouts/mailer
+  Rendered user_mailer/account_activation.text.erb within layouts/mailer (1.4ms)
+UserMailer#account_activation: processed outbound mail in 177.1ms
+Sent mail to gaxf@hotmail.com (12.9ms)
+Date: Fri, 23 Dec 2016 15:16:09 +0000
+From: noreply@example.com
+To: gaxf@hotmail.com
+Message-ID: <585d3fb9e4105_68b22c37e0100ab@gilmarfilho-rails-tutorial-3817497.mail>
+Subject: Account activation
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_585d3fb9e1ccb_68b22c37e099b7";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_585d3fb9e1ccb_68b22c37e099b7
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<h1>Sample App</h1>
+
+<p>Hi Gilmar Filho,</p>
+
+<p>
+Welcome to the Sample App! Click on the link below to activate your account:
+</p>
+
+<a href="https://localhost:3000/account_activations/-S35RBryc6ljSaDMH5ayLg/edit?email=gaxf%40hotmail.com">Activate</a>
+
+----==_mimepart_585d3fb9e1ccb_68b22c37e099b7
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <h1>UserMailer#account_activation</h1>
+
+<p>
+  , find me in app/views/user_mailer/account_activation.html.erb
+</p>
+  </body>
+</html>
+
+----==_mimepart_585d3fb9e1ccb_68b22c37e099b7--
+
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/users/102
+Completed 302 Found in 724ms (ActiveRecord: 9.2ms)
+
+
+Started GET "/users/102" for 10.240.0.186 at 2016-12-23 15:16:10 +0000
+Cannot render console from 10.240.0.186! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"102"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 102], ["LIMIT", 1]]
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 10.240.0.241 at 2016-12-23 15:16:10 +0000
+Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 41ms (Views: 39.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.240.0.241 at 2016-12-23 15:16:15 +0000
+Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 43ms (Views: 41.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.240.0.110 at 2016-12-23 15:16:19 +0000
+Cannot render console from 10.240.0.110! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.7ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 51ms (Views: 49.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.240.1.20 at 2016-12-23 15:16:25 +0000
+Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xcB+bvdxSBtE32HXRZffl3rQZxVjSEEE3adN0mnkJBh78XdybebSK/kgZJu51gHGZ+g9p4C5kvXOVai5gOe2QA==", "session"=>{"email"=>"gaxf@hotmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "gaxf@hotmail.com"], ["LIMIT", 1]]
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/
+Completed 302 Found in 78ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 10.240.0.119 at 2016-12-23 15:16:25 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_shim.html.erb (0.5ms)
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 45ms (Views: 43.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.240.0.69 at 2016-12-23 15:26:24 +0000
+Cannot render console from 10.240.0.69! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.8ms)
+  Rendered layouts/_shim.html.erb (0.5ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 147ms (Views: 145.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.240.0.187 at 2016-12-23 15:26:47 +0000
+Cannot render console from 10.240.0.187! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"sqdberLk9KQIMkPn9fe1bj957VIPkDY3Q1GcaZX3gFMMllJmKHNulLXNRqsJtms/IkG34Oxh5cZQo3kCfPQSCw==", "session"=>{"email"=>"example@railstutorial.org", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "example@railstutorial.org"], ["LIMIT", 1]]
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/users/1
+Completed 302 Found in 158ms (ActiveRecord: 4.5ms)
+
+
+Started GET "/users/1" for 10.240.1.64 at 2016-12-23 15:26:47 +0000
+Cannot render console from 10.240.1.64! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://rails-tutorial-gilmarfilho.c9users.io:8080/
+Completed 302 Found in 3ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 10.240.1.20 at 2016-12-23 15:26:47 +0000
+Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_header.html.erb (2.4ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 42ms (Views: 40.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users" for 10.240.0.110 at 2016-12-23 15:26:51 +0000
+Cannot render console from 10.240.0.110! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  Rendered collection of users/_user.html.erb [30 times] (10.2ms)
+  Rendered users/index.html.erb within layouts/application (17.6ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 60ms (Views: 56.0ms | ActiveRecord: 1.3ms)
+
+
