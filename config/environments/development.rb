@@ -31,7 +31,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :test
 
-  host = 'localhost:3000'
+  host = 'https://gilmar-railstutorial.herokuapp.com/'
 
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
 
